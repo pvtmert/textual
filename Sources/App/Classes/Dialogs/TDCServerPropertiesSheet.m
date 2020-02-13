@@ -2309,10 +2309,9 @@ TEXTUAL_IGNORE_DEPRECATION_END
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(IRCChannelConfig *obj1, IRCChannelConfig *obj2) {
 		return [obj1.channelName caseInsensitiveCompare:obj2.channelName];
 	}];
-	NSArray *sdesc = @[ sortDescriptor ];
-	[self.channelListArrayController setSortDescriptors:sdesc];
+	[self.channelListArrayController setSortDescriptors:@[ sortDescriptor ]];
 	[self.channelListArrayController rearrangeObjects];
-
+	/*
 	NSLog(@"table column: %@", tableColumn);
 	return;
 
@@ -2330,6 +2329,7 @@ TEXTUAL_IGNORE_DEPRECATION_END
 	//	[self clearChannelListPredicate];
 	//	[self setChannelListPredicate];
 	return;
+	*/
 }
 
 #pragma mark -
