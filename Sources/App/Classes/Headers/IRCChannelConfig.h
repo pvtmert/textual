@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, IRCChannelType) {
 #pragma mark -
 #pragma mark Immutable Object
 
-@interface IRCChannelConfig : NSObject <NSCopying, NSMutableCopying>
+@interface IRCChannelConfig : NSObject <NSCopying, NSMutableCopying, NSObject>
 @property (readonly) BOOL autoJoin;
 @property (readonly) BOOL ignoreGeneralEventMessages;
 @property (readonly) BOOL ignoreHighlights;
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, IRCChannelType) {
 @property (readonly) BOOL pushNotifications;
 @property (readonly) BOOL showTreeBadgeCount;
 @property (readonly) IRCChannelType type;
-@property (readonly, copy) NSString *channelName;
+@property (readonly, copy, nonatomic) NSString *channelName;
 @property (readonly, copy) NSString *uniqueIdentifier;
 @property (readonly, copy, nullable) NSString *defaultModes;
 @property (readonly, copy, nullable) NSString *defaultTopic;

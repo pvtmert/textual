@@ -2305,6 +2305,33 @@ TEXTUAL_IGNORE_DEPRECATION_END
 	return YES;
 }
 
+- (void)tableView:(NSTableView *)tableView mouseDownInHeaderOfTableColumn:(NSTableColumn *)tableColumn {
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(IRCChannelConfig *obj1, IRCChannelConfig *obj2) {
+		return [obj1.channelName caseInsensitiveCompare:obj2.channelName];
+	}];
+	NSArray *sdesc = @[ sortDescriptor ];
+	[self.channelListArrayController setSortDescriptors:sdesc];
+	[self.channelListArrayController rearrangeObjects];
+
+	NSLog(@"table column: %@", tableColumn);
+	return;
+
+	self.config.channelList = [self.config.channelList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+		IRCChannelConfig *cfg1 = obj1;
+		IRCChannelConfig *cfg2 = obj2;
+		return [cfg1.channelName caseInsensitiveCompare:cfg2.channelName];
+	}];
+
+	NSMutableArray *names = [NSMutableArray new];
+	for(int i=0; i<self.config.channelList.count; i++) [names addObject:[self.config.channelList[i].channelName copy]];
+	NSLog(@"config channel list: %@", names);
+
+	//	[self.channelListTable reloadData];
+	//	[self clearChannelListPredicate];
+	//	[self setChannelListPredicate];
+	return;
+}
+
 #pragma mark -
 #pragma mark NSWindow Delegate
 
