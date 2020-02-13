@@ -2306,13 +2306,12 @@ TEXTUAL_IGNORE_DEPRECATION_END
 }
 
 - (void)tableView:(NSTableView *)tableView mouseDownInHeaderOfTableColumn:(NSTableColumn *)tableColumn {
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(IRCChannelConfig *obj1, IRCChannelConfig *obj2) {
-		return [obj1.channelName caseInsensitiveCompare:obj2.channelName];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(IRCChannelConfig *cfg1, IRCChannelConfig *cfg2) {
+		return [cfg1.channelName caseInsensitiveCompare:cfg2.channelName];
 	}];
 	[self.channelListArrayController setSortDescriptors:@[ sortDescriptor ]];
 	[self.channelListArrayController rearrangeObjects];
 	[self.channelListArrayController setSortDescriptors:nil];
-	/*
 	NSLog(@"table column: %@", tableColumn);
 	return;
 
@@ -2330,7 +2329,6 @@ TEXTUAL_IGNORE_DEPRECATION_END
 	//	[self clearChannelListPredicate];
 	//	[self setChannelListPredicate];
 	return;
-	*/
 }
 
 #pragma mark -
