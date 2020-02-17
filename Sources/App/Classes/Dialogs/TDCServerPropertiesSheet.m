@@ -2291,11 +2291,16 @@ TEXTUAL_IGNORE_DEPRECATION_END
 	NSUInteger draggedRowIndex = draggedRowIndexes.firstIndex;
 
 	if (tableView == self.channelListTable) {
+		//[self.channelListArrayController setSortDescriptors:@[ ]];
+
 		[self clearChannelListPredicate];
 
 		[self.channelListArrayController moveObjectAtArrangedObjectIndex:draggedRowIndex toIndex:row];
 
 		[self setChannelListPredicate];
+
+		//self.config.channelList = self.channelListArrayController.arrangedObjects;
+
 	} else if (tableView == self.highlightsTable) {
 		[self.highlightListArrayController moveObjectAtArrangedObjectIndex:draggedRowIndex toIndex:row];
 	} else if (tableView == self.addressBookTable) {
@@ -2311,13 +2316,17 @@ TEXTUAL_IGNORE_DEPRECATION_END
 	}];
 	[self.channelListArrayController setSortDescriptors:@[ sortDescriptor ]];
 	[self.channelListArrayController rearrangeObjects];
-	[self.channelListArrayController setSortDescriptors:nil];
+	[self.channelListArrayController setSortDescriptors:@[ [[NSSortDescriptor alloc] initWithKey:nil ascending:YES] ]];
+	[self.channelListArrayController rearrangeObjects];
+	//self.config.channelList = self.channelListArrayController.arrangedObjects;
+	//[self.channelListTable reloadData];
+	//[self clearChannelListPredicate];
+	//[self setChannelListPredicate];
+	//[self updateChannelListPage];
 	NSLog(@"table column: %@", tableColumn);
 	return;
 
-	self.config.channelList = [self.config.channelList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-		IRCChannelConfig *cfg1 = obj1;
-		IRCChannelConfig *cfg2 = obj2;
+	self.config.channelList = [self.config.channelList sortedArrayUsingComparator:^NSComparisonResult(IRCChannelConfig *cfg1, IRCChannelConfig *cfg2) {
 		return [cfg1.channelName caseInsensitiveCompare:cfg2.channelName];
 	}];
 
