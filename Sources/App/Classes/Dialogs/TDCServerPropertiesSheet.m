@@ -2291,7 +2291,7 @@ TEXTUAL_IGNORE_DEPRECATION_END
 	NSUInteger draggedRowIndex = draggedRowIndexes.firstIndex;
 
 	if (tableView == self.channelListTable) {
-		//[self.channelListArrayController setSortDescriptors:@[ ]];
+		[self.channelListArrayController setSortDescriptors:@[ ]];
 
 		[self clearChannelListPredicate];
 
@@ -2316,8 +2316,8 @@ TEXTUAL_IGNORE_DEPRECATION_END
 	}];
 	[self.channelListArrayController setSortDescriptors:@[ sortDescriptor ]];
 	[self.channelListArrayController rearrangeObjects];
-	[self.channelListArrayController setSortDescriptors:@[ [[NSSortDescriptor alloc] initWithKey:nil ascending:YES] ]];
-	[self.channelListArrayController rearrangeObjects];
+	//[self.channelListArrayController setSortDescriptors:@[ [[NSSortDescriptor alloc] initWithKey:nil ascending:YES] ]];
+	//[self.channelListArrayController rearrangeObjects];
 	//self.config.channelList = self.channelListArrayController.arrangedObjects;
 	//[self.channelListTable reloadData];
 	//[self clearChannelListPredicate];
